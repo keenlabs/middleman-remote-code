@@ -1,4 +1,4 @@
-require 'awesome_print'
+require 'net/http'
 
 module Middleman
   module RemoteCode
@@ -46,10 +46,7 @@ module Middleman
         def block_code(code, language)
           return super(code, language) unless language == "remote"
 
-          ap options
-
           detect_links(code).each do |uri|
-            puts "Discovered #{uri}"
             index = 0
             if uri =~ /#(.+)$/
               index = $1.to_i
